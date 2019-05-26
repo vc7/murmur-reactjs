@@ -6,12 +6,17 @@ import { Form } from "./components/Form";
 import { Items } from "./components/Items";
 
 class App extends React.Component {
+
+    onNewMurmur(murmur) {
+        console.log("A new murmur: \"" + murmur + "\"");
+    }
+
     render() {
         return (
             <div className="container">
                 <Navbar/>
                 <div className="container">
-                    <Form/>
+                    <Form onNewMurmur={(murmur) => this.onNewMurmur(murmur)}/>
                     <Items/>
                 </div>
             </div>

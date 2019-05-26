@@ -11,14 +11,12 @@ export class Form extends React.Component {
 
     onSubmit(event) {
         event.preventDefault();
+        this.handleSubmit();
     }
 
     onKeyDown(event) {
         if ((event.ctrlKey || event.metaKey) && (event.keyCode === 13 || event.keyCode === 10)) {
-            console.log("\"" + this.state.murmur + "\" recieved");
-            this.setState({
-                murmur: ""
-            });
+            this.handleSubmit();
         }
     }
 
@@ -26,6 +24,13 @@ export class Form extends React.Component {
         this.setState({
             murmur: event.target.value
         })
+    }
+
+    handleSubmit() {
+        this.props.onNewMurmur(this.state.murmur);
+        this.setState({
+            murmur: ""
+        });
     }
 
     render() {
@@ -38,7 +43,7 @@ export class Form extends React.Component {
                         value={this.state.murmur}
                         onKeyDown={(event) => this.onKeyDown(event)}
                         onChange={(event) => this.onHandleChangeMurmur(event)}/>
-                    <button className="btn btn-primary ml-3">碎碎念</button>
+                    <button className="btn btn-primary ml-3" type="submit" disabled={!this.state.murmur}>碎碎念</button>
                 </form>
             </div>
         );
@@ -47,4 +52,5 @@ export class Form extends React.Component {
 
 Form.propTypes = {
     murmur: PropTypes.string,
+    onNewMurmur: PropTypes.func,
 }
