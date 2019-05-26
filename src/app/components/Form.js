@@ -14,10 +14,13 @@ export class Form extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="row border py-3 px-3 my-3 bg-white">
                 <form className="form-inline" onSubmit={(event) => this.onSubmit(event)}>
-                    <input type="text" className="form-control" onKeyDown={(event) => this.onKeyDown(event)}/>
-                    <button className="btn btn-primary ml-3">Submit</button>
+                    <input 
+                        type="text"
+                        className="form-control" 
+                        onKeyDown={(event) => this.onKeyDown(event)}/>
+                    <button className="btn btn-primary ml-3">碎碎念</button>
                 </form>
             </div>
         );
