@@ -11,13 +11,16 @@ export class Form extends React.Component {
 
     onSubmit(event) {
         event.preventDefault();
-        this.handleSubmit();
     }
 
     onKeyDown(event) {
         if ((event.ctrlKey || event.metaKey) && (event.keyCode === 13 || event.keyCode === 10)) {
             this.handleSubmit();
         }
+    }
+
+    onHandleSubmitClick() {
+        this.handleSubmit();
     }
 
     onHandleChangeMurmur(event) {
@@ -27,10 +30,12 @@ export class Form extends React.Component {
     }
 
     handleSubmit() {
-        this.props.onNewMurmur(this.state.murmur);
-        this.setState({
-            murmur: ""
-        });
+        if (this.state.murmur && this.state.murmur.replace(/\s/g, '').length) {
+            this.props.onNewMurmur(this.state.murmur);
+            this.setState({
+                murmur: ""
+            });
+        }
     }
 
     render() {
@@ -43,7 +48,7 @@ export class Form extends React.Component {
                         value={this.state.murmur}
                         onKeyDown={(event) => this.onKeyDown(event)}
                         onChange={(event) => this.onHandleChangeMurmur(event)}/>
-                    <button className="btn btn-primary ml-3" type="submit" disabled={!this.state.murmur}>碎碎念</button>
+                    <button className="btn btn-primary ml-3" type="submit" disabled={!(this.state.murmur && this.state.murmur.replace(/\s/g, '').length)} onClick={this.onHandleSubmitClick.bind(this)}>碎碎念</button>
                 </form>
             </div>
         );

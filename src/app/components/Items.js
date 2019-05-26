@@ -1,11 +1,19 @@
 import React from "react";
 import { NoItem } from "./NoItem";
-// import { Item } from "./Item";
+import { Item } from "./Item";
 
 export const Items = (props) => {
-    return (
-        <div>
-            <NoItem/>
-        </div>
-    );
+    if (props.murmurs.length) {
+        return (
+            <div>
+                {props.murmurs.map((murmur, index) => <Item key={index} murmur={murmur}/>)}
+            </div>
+        );
+    } else {
+        return (
+            <div>
+                <NoItem/>
+            </div>
+        );
+    }
 };

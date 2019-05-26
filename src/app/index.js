@@ -6,9 +6,21 @@ import { Form } from "./components/Form";
 import { Items } from "./components/Items";
 
 class App extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            murmurs: []
+        }
+    }
 
     onNewMurmur(murmur) {
-        console.log("A new murmur: \"" + murmur + "\"");
+        var newMurmur = {
+            content: murmur
+        }
+        this.setState({
+            ...this.state,
+            murmurs: [newMurmur, ...this.state.murmurs]
+        })
     }
 
     render() {
@@ -17,7 +29,7 @@ class App extends React.Component {
                 <Navbar/>
                 <div className="container">
                     <Form onNewMurmur={(murmur) => this.onNewMurmur(murmur)}/>
-                    <Items/>
+                    <Items murmurs={this.state.murmurs}/>
                 </div>
             </div>
         );
